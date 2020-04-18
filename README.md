@@ -1,4 +1,6 @@
-# text-adventure-2
+# Text Adventure Game
+
+![Node.js CI](https://github.com/lbicknese/text-adventure-game/workflows/Node.js%20CI/badge.svg)
 
 ## Project setup
 ```
