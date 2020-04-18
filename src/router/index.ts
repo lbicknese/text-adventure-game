@@ -1,13 +1,19 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
+import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
   {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home
   },
   {
@@ -24,6 +30,15 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const username = localStorage.getItem('username')
+  if (to.name !== 'login' && (!username || username.length === 0)) {
+    next({ name: 'login' })
+  } else {
+    next()
+  }
 })
 
 export default router
