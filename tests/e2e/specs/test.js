@@ -30,4 +30,10 @@ describe('Login processes', () => {
     cy.contains('h1', 'Login')
     cy.get('#logout').should('not.exist')
   })
+  it('should allow about when not logged in', () => {
+    cy.clearLocalStorage()
+    cy.visit('/about')
+    cy.contains('h1', 'About')
+    cy.title().should('include', 'About')
+  })
 })
