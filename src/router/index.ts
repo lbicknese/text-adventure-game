@@ -18,7 +18,7 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/about',
-    name: 'About',
+    name: 'about',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -32,9 +32,14 @@ const router = new VueRouter({
   routes
 })
 
+const whitelisted: Array<string | null | undefined> = [
+  'login',
+  'about'
+]
+
 router.beforeEach((to, from, next) => {
   const username = localStorage.getItem('username')
-  if (to.name !== 'login' && (!username || username.length === 0)) {
+  if (!whitelisted.includes(to.name) && (!username || username.length === 0)) {
     next({ name: 'login' })
   } else {
     next()
