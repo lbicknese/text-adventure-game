@@ -1,21 +1,27 @@
 <template>
-  <div>
+  <div
+    class="flex flex-column col-6 mx-auto">
     <h1>Login</h1>
     <label
-      for="username">
+      for="username"
+      class="label">
       Username
     </label>
     <input
       type="text"
       id="username"
+      class="input bg-darken-1"
+      autofocus
       v-model="username">
     <span
-      id="username-info">
+      id="username-info"
+      class="muted mb2">
       Type in a username
     </span>
     <button
       type="button"
       id="login"
+      class="btn btn-primary"
       @click="onLogin">
       Login
     </button>
