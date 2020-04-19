@@ -27,11 +27,16 @@ jobs:
     - name: Cypress run
       uses: cypress-io/github-action@v1.16.1
       with:
-        build: npm run serve
+        start: npm run serve
+        wait-on: http://localhost:8080/
+      env:
+        CYPRESS_baseUrl: http://localhost:8080/
+        CI: true
+        # For E2E testing
+        NODE_ENV: production
     - run: npm ci
     - run: npm run lint
     - run: npm run build
-    - run: npm run test:unit
     - run: npm run test:unit
       env:
         CI: true
