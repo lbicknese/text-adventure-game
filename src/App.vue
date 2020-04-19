@@ -4,7 +4,7 @@
     <div
       id="nav"
       role="navigation"
-      class="flex pt2 px2 col-12">
+      class="flex items-center pt2 px2 col-12">
       <router-link
         to="/">
         Home
@@ -20,13 +20,16 @@
         id="username">
         {{ username }}
       </div>
-      <button
-        v-if="username"
-        type="button"
-        id="logout"
-        @click="onLogout">
-        Logout
-      </button>
+      <div>
+        <button
+          v-if="username"
+          type="button"
+          id="logout"
+          class="btn"
+          @click="onLogout">
+          Logout
+        </button>
+      </div>
     </div>
     <router-view/>
   </div>
