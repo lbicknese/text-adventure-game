@@ -1,8 +1,20 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div
+    id="app">
+    <div
+      id="nav"
+      role="navigation"
+      class="flex pt2 px2 col-12">
+      <router-link
+        to="/">
+        Home
+      </router-link>
+      <span class="mx1">|</span>
+      <router-link
+        to="/about">
+        About
+      </router-link>
+      <div class="flex-auto"></div>
       <div
         v-if="username"
         id="username">
@@ -41,6 +53,5 @@ export default Vue.extend({
 })
 </script>
 
-<style>
-
+<style scoped>
 </style>
