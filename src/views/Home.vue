@@ -9,16 +9,16 @@
       class="flex flex-wrap">
       <div class="md-col-6 col-12">
         <div class="md-mr1 mb1 md-mb0 p2 border rounded bg-darken-1">
-          <h2>Create Game</h2>
+          <h2>Manage Game Template</h2>
           <p>
-            Create a new game for others to join.
+            Manage game templates that you create.
           </p>
           <div class="actions col-12 flex justify-end">
-            <button
-              type="button"
+            <router-link
+              :to="{ name: 'templates' }"
               class="btn btn-primary">
-              Create
-            </button>
+              Templates
+            </router-link>
           </div>
         </div>
       </div>
