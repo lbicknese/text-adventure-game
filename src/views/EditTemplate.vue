@@ -13,6 +13,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import Templates from '../api/Templates'
 import GameTemplate from '@/models/GameTemplate'
 import Template from '../components/Template.vue'
+import { Notification } from '../store/toasts'
 @Component({
   name: 'NewTemplate',
   components: { Template }
@@ -34,7 +35,7 @@ export default class EditTemplateView extends Vue {
   onUpdate () {
     Templates.update(this.template)
       .then(() => {
-        console.log('do something')
+        this.$store.dispatch('toasts/add', new Notification({ message: 'Updated template', state: 'success' }))
       })
   }
 }

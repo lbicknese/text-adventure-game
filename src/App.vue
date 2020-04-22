@@ -32,13 +32,16 @@
       </div>
     </div>
     <router-view/>
+    <Toasts />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import Toasts from './components/Toasts.vue'
 export default Vue.extend({
   name: 'App',
+  components: { Toasts },
   computed: {
     username () { return this.$store.state.username }
   },

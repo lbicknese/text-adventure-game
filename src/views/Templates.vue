@@ -69,6 +69,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import Templates from '../api/Templates'
 import GameTemplate from '@/models/GameTemplate'
+import { Notification } from '../store/toasts'
 @Component({
   name: 'Templates'
 })
@@ -88,6 +89,7 @@ export default class TemplatesView extends Vue {
   onDelete (key: string) {
     Templates.delete(key)
       .then(() => {
+        this.$store.dispatch('toasts/add', new Notification({ message: 'Deleted template', state: 'success' }))
         Templates.query()
           .then(templates => {
             this.templates = templates
