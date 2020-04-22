@@ -1,0 +1,47 @@
+// https://docs.cypress.io/api/introduction/api.html
+
+describe('Game templates', () => {
+  it('page exists', () => {
+    localStorage.setItem('username', 'luke')
+    cy.visit('/templates')
+    cy.contains('h1', 'Templates')
+    cy.title().should('include', 'Templates')
+  })
+  it('should have create page', () => {
+    localStorage.setItem('username', 'luke')
+    cy.get('a#create').first().click()
+    cy.contains('h1', 'Create Template')
+    cy.title().should('include', 'New Template')
+    cy.get('input#name').should('exist')
+    cy.get('textarea#description').should('exist')
+  })
+  it('should validate form', () => {
+    localStorage.setItem('username', 'luke')
+    cy.visit('/templates/new')
+    cy.contains('h1', 'Create Template')
+    cy.get('button[type="submit"]').click()
+    cy.get('.error').should('have.length', 2)
+  })
+  it('should manage templates', () => {
+    localStorage.setItem('username', 'luke')
+    cy.visit('/templates/new')
+    cy.contains('h1', 'Create Template')
+    cy.get('#name').type('Testing')
+    cy.get('#description').type('This is a description')
+    cy.get('button[type="submit"]').click()
+    cy.get('h1').should('contain', 'Testing')
+    cy.get('#description').type('Updated description')
+    cy.get('button[type="submit"]').click()
+    // cy.get('.toast').should('contain', 'Updated template')
+    cy.get('#cancel').click()
+    cy.get('button.bg-red').first().click()
+    // cy.get('.toast').should('contain', 'Deleted template')
+  })
+  it('should go back to templates on cancel create', () => {
+    localStorage.setItem('username', 'luke')
+    cy.visit('/templates/new')
+    cy.contains('h1', 'Create Template')
+    cy.get('a#cancel').click()
+    cy.contains('h1', 'Templates')
+  })
+})

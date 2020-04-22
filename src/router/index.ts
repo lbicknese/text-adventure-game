@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
+import Templates from '../views/Templates.vue'
+import NewTemplate from '../views/NewTemplate.vue'
+import EditTemplate from '../views/EditTemplate.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +18,21 @@ const routes: Array<RouteConfig> = [
     path: '/',
     name: 'home',
     component: Home
+  },
+  {
+    path: '/templates',
+    name: 'templates',
+    component: Templates
+  },
+  {
+    path: '/templates/new',
+    name: 'newTemplate',
+    component: NewTemplate
+  },
+  {
+    path: '/templates/:id',
+    name: 'editTemplate',
+    component: EditTemplate
   },
   {
     path: '/about',

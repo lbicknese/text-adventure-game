@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex, { ActionTree, MutationTree } from 'vuex'
+import GameTemplate from '@/models/GameTemplate'
+import Templates from '@/api/Templates'
 
 Vue.use(Vuex)
 
