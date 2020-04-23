@@ -58,12 +58,14 @@
     <div
       class="flex">
       <router-link
+        :disabled="saving"
         :to="{ name: 'templates' }"
         id="cancel"
         class="btn btn-outline mr1">
         Cancel
       </router-link>
       <button
+        :disabled="saving"
         type="submit"
         class="btn btn-primary">
         Save
@@ -79,6 +81,7 @@ import GameTemplate from '../models/GameTemplate'
 @Component
 export default class Template extends Vue {
   @Prop() private template!: GameTemplate
+  @Prop() private saving!: boolean
 
   errors = { name: false, description: false }
 
