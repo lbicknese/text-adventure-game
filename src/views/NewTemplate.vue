@@ -4,6 +4,7 @@
     <h1>Create Template</h1>
     <Template
       :template="template"
+      :saving="saving"
       @submit="onCreate" />
   </div>
 </template>
@@ -19,6 +20,7 @@ import { Notification } from '../store/toasts'
   components: { Template }
 })
 export default class NewTemplate extends Vue {
+  saving = false
   private template = new GameTemplate()
 
   beforeMount () {
@@ -26,16 +28,20 @@ export default class NewTemplate extends Vue {
   }
 
   onCreate () {
+    this.saving = true
     Templates.create(this.template)
       .then(() => {
         this.$store.dispatch('toasts/add', new Notification({ message: 'Created template', state: 'success' }))
-        this.$router.push({ name: 'editTemplate', params: { id: this.template.id } })
+        this.$router.replace({ name: 'editTemplate', params: { id: this.template.id } })
           .catch(() => {
             this.$store.dispatch('toasts/add', new Notification({ message: 'There was an error redirecting', state: 'error' }))
           })
       })
       .catch(() => {
         this.$store.dispatch('toasts/add', new Notification({ message: 'There was an error creating template.', state: 'error' }))
+      })
+      .finally(() => {
+        this.saving = false
       })
   }
 }
