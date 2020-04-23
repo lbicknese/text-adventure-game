@@ -40,7 +40,7 @@
             <button
               type="button"
               class="btn btn-small bg-red white rounded ml1"
-              @click="onDelete(template.id)">
+              @click="onConfirmDelete(template)">
               Delete
             </button>
           </td>
@@ -62,6 +62,11 @@
         </router-link>
       </div>
     </div>
+    <Confirmation
+      :open="confirmDelete"
+      :message="confirmDeleteMessage"
+      @ok="onDelete"
+      @cancel="confirmDelete = false" />
   </div>
 </template>
 
@@ -70,11 +75,17 @@ import { Component, Vue } from 'vue-property-decorator'
 import Templates from '../api/Templates'
 import GameTemplate from '@/models/GameTemplate'
 import { Notification } from '../store/toasts'
+import Confirmation from '../components/Confirmation.vue'
 @Component({
-  name: 'Templates'
+  name: 'Templates',
+  components: { Confirmation }
 })
 export default class TemplatesView extends Vue {
   templates = new Array<GameTemplate>()
+  templateId!: string
+  confirmDelete = false
+  confirmDeleteMessage = '';
+
   beforeMount () {
     document.title = 'Templates'
   }
@@ -86,14 +97,25 @@ export default class TemplatesView extends Vue {
       })
   }
 
-  onDelete (key: string) {
-    Templates.delete(key)
+  onConfirmDelete (template: GameTemplate): void {
+    this.templateId = template.id
+    this.confirmDeleteMessage = `Are you sure you want to delete ${template.name}?`
+    this.confirmDelete = true
+  }
+
+  onDelete () {
+    Templates.delete(this.templateId)
       .then(() => {
         this.$store.dispatch('toasts/add', new Notification({ message: 'Deleted template', state: 'success' }))
         Templates.query()
           .then(templates => {
             this.templates = templates
           })
+      })
+      .finally(() => {
+        this.confirmDelete = false
+        this.templateId = ''
+        this.confirmDeleteMessage = ''
       })
   }
 }
