@@ -1,13 +1,9 @@
 import Vue from 'vue'
 import Vuex, { ActionTree, MutationTree } from 'vuex'
-import GameTemplate from '@/models/GameTemplate'
-import Templates from '@/api/Templates'
+import State from './state'
+import toasts from './toasts'
 
 Vue.use(Vuex)
-
-export class State {
-  username: string | undefined = undefined;
-}
 
 export const mutations: MutationTree<State> = {
   setUsername (state, username: string) {
@@ -35,10 +31,11 @@ export const actions: ActionTree<State, State> = {
   }
 }
 
-export default new Vuex.Store({
+export default new Vuex.Store<State>({
   state: new State(),
   mutations,
   actions,
   modules: {
+    toasts
   }
 })

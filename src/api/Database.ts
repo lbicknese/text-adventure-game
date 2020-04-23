@@ -117,7 +117,7 @@ export default class Database {
           resolve()
         }
 
-        const request = transaction.objectStore(storeName).put(value)
+        transaction.objectStore(storeName).put(value)
       })
     })
   }
@@ -140,7 +140,7 @@ export default class Database {
           resolve()
         }
 
-        const request = transaction.objectStore(storeName).delete(key)
+        transaction.objectStore(storeName).delete(key)
       })
     })
   }

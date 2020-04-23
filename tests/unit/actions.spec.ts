@@ -1,5 +1,6 @@
 import { expect } from 'chai'
-import { actions, State } from '../../src/store'
+import { actions } from '../../src/store'
+import State from '../../src/store/state'
 import * as sinon from 'sinon'
 import { ActionContext, ActionMethod } from 'vuex'
 
